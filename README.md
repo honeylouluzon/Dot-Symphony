@@ -18,6 +18,7 @@
 6. [Examples](#examples)  
 7. [Future Extensions](#future-extensions)  
 8. [Credits & License](#credits--license)
+9. [Deployment](#deployment)
 
 ---
 
@@ -234,6 +235,17 @@ All data (emoji definitions, journal entries, dot logs, music sequences) lives i
 - **Author**: Your Name  
 - **License**: MIT  
 - **Inspired by**: “Consciousness Continuum” paper by Samuel Cummings & collaborators; Dot Theory conceptual framework.  
+
+---
+
+## Deployment
+
+- The app is now fully client-side and ready for GitHub Pages deployment.
+- Build with `npm run build` in `/ui`.
+- Deploy with `npm run deploy` in `/ui` (publishes to `gh-pages` branch).
+- All JS files are in `/ui/js/`, CSS in `/ui/css/`, and assets in `/ui/assets/`.
+- The app implements the Dot Language Composer, Mind State Tracker, and Dot Music Composer modules as described in the README.
+- Theming, accessibility, and modular design follow `UI-UX.md` and `Omni-Guide.md` best practices.
 
 ---
 

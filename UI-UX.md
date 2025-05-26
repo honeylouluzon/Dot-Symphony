@@ -10,9 +10,9 @@
 ## 1. PROJECT METADATA (Editable)
 ```json
 {
-  "projectName": "MyApp",
+  "projectName": "Dot Symphony",
   "version": "1.0.0",
-  "author": "YourName",
+  "author": "honeylouluzon",
   "themePreference": "auto",
   "defaultFont": "Inter, sans-serif"
 }
