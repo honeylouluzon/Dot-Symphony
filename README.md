@@ -3,6 +3,8 @@
 **Combines** Dot Emoji Language → Consciousness Clock → Dot Music Composer  
 **Built on** Dot Theory & the Consciousness Continuum
 
+**[Live Preview](https://honeylouluzon.github.io/Dot-Symphony/)**
+
 ---
 
 ## Table of Contents
