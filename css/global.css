@@ -1,0 +1,85 @@
+/* Global styles for Dot Symphony - UI-UX.md compliant */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--background, #fff);
+  color: var(--text, #111);
+  min-height: 100vh;
+}
+
+.app-container, .main-layout {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+nav.navbar ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+}
+nav.navbar button {
+  background: none;
+  border: none;
+  font: inherit;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+nav.navbar button.active, nav.navbar button:focus {
+  background: var(--accent, #2563EB);
+  color: #fff;
+}
+
+.ds-btn {
+  padding: 10px 20px;
+  border-radius: 6px;
+  background: var(--accent, #2563EB);
+  color: var(--text, #fff);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ds-btn:hover, .ds-btn:focus {
+  background: #174ea6;
+}
+
+.ds-input-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+.ds-input {
+  padding: 12px;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.ds-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ds-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (max-width: 767px) {
+  .main-layout, .app-container {
+    padding: 1rem 0.5rem;
+  }
+  nav.navbar ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

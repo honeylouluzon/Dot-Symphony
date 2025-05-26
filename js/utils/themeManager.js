@@ -15,3 +15,16 @@ export function setTheme(theme) {
 export function getTheme() {
   return localStorage.getItem('theme') || 'auto';
 }
+
+export function getPreferredTheme() {
+  const stored = localStorage.getItem('theme');
+  if (stored) return stored;
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+  return 'light';
+}
+
+export function toggleTheme() {
+  const current = getTheme();
+  const next = current === 'dark' ? 'light' : 'dark';
+  setTheme(next);
+}
