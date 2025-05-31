@@ -5,7 +5,7 @@
 
 **[Live Preview](https://htmlpreview.github.io/?https://github.com/honeylouluzon/Dot-Symphony/blob/b43a5041ac0a93f10626d9d7bfddecae4799f503/index.html)**
 
-**[Live Preview](https://honeylouluzon.github.io/Dot-Symphony/)**
+**[Github Pages](https://honeylouluzon.github.io/Dot-Symphony/)**
 
 ---
 
