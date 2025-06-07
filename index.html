@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot Symphony - A Consciousness Expression App</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2585382902816989"
+         crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">
+                <span class="dot-icon">●</span>
+                Dot Symphony
+                <span class="dot-icon">●</span>
+            </h1>
+            <p class="subtitle">A Consciousness Expression App</p>
+            <p class="tagline">Dot Language → Consciousness Clock → Music Composer</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="language">Dot Language Composer</button>
+            <button class="tab-btn" data-tab="tracker">Mind State Tracker</button>
+            <button class="tab-btn" data-tab="music">Dot Music Composer</button>
+        </nav>
+
+        <!-- Module 1: Dot Language Composer -->
+        <div id="language-module" class="module active">
+            <div class="module-header">
+                <h2>Build Your Personal Dot Emoji Lexicon</h2>
+                <p>Create and evolve your unique consciousness vocabulary</p>
+            </div>
+
+            <div class="dot-creator">
+                <h3>Create New Dot</h3>
+                <div class="creator-form">
+                    <div class="form-group">
+                        <label for="dot-name">Name</label>
+                        <input type="text" id="dot-name" placeholder="e.g., Focus, Joy, Anxious">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dot-description">Description</label>
+                        <input type="text" id="dot-description" placeholder="Optional description">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dot-color">Color</label>
+                            <input type="color" id="dot-color" value="#4ecdc4">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dot-size">Size</label>
+                            <select id="dot-size">
+                                <option value="small">Small</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="large">Large</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dot-shape">Shape</label>
+                            <select id="dot-shape">
+                                <option value="circle" selected>Circle</option>
+                                <option value="square">Square</option>
+                                <option value="triangle">Triangle</option>
+                                <option value="diamond">Diamond</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dot-animation">Animation</label>
+                            <select id="dot-animation">
+                                <option value="none">None</option>
+                                <option value="pulse" selected>Pulse</option>
+                                <option value="fade">Fade</option>
+                                <option value="rotate">Rotate</option>
+                                <option value="bounce">Bounce</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="preview-section">
+                        <label>Preview</label>
+                        <div id="dot-preview" class="dot-preview"></div>
+                    </div>
+
+                    <button id="save-dot" class="btn btn-primary">Save Dot</button>
+                </div>
+            </div>
+
+            <div class="dot-dictionary">
+                <div class="dictionary-header">
+                    <h3>Your Dot Dictionary</h3>
+                    <div class="dictionary-actions">
+                        <button id="export-dictionary" class="btn btn-secondary">Export</button>
+                        <button id="import-dictionary" class="btn btn-secondary">Import</button>
+                        <input type="file" id="import-file" accept=".json" style="display: none;">
+                    </div>
+                </div>
+                <div id="dot-grid" class="dot-grid"></div>
+            </div>
+        </div>
+
+        <!-- Module 2: Mind State Tracker -->
+        <div id="tracker-module" class="module">
+            <div class="module-header">
+                <h2>24-Hour Consciousness Clock</h2>
+                <p>Track your hourly emotional and cognitive states</p>
+            </div>
+
+            <div class="date-controls" style="text-align: center; margin-bottom: 20px;">
+                <label for="date-picker" style="display: block; margin-bottom: 10px; font-weight: 500;">Select Date:</label>
+                <input type="date" id="date-picker" style="padding: 10px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; font-size: 1rem;">
+            </div>
+
+            <div class="clock-container">
+                <div class="consciousness-clock">
+                    <div class="clock-center">
+                        <div class="date-display" id="current-date"></div>
+                        <button id="play-timeline" class="btn btn-primary">Play Timeline</button>
+                    </div>
+                    <div class="hour-ring" id="hour-ring"></div>
+                </div>
+            </div>
+
+            <div class="entry-panel" id="entry-panel" style="display: none;">
+                <h3>Log Entry for <span id="selected-hour"></span></h3>
+                <div class="entry-options">
+                    <button class="entry-type-btn active" data-type="dot">Select Dot</button>
+                    <button class="entry-type-btn" data-type="journal">Journal Entry</button>
+                </div>
+
+                <div id="dot-selection" class="dot-selection">
+                    <div id="available-dots" class="available-dots"></div>
+                </div>
+
+                <div id="journal-input" class="journal-input" style="display: none;">
+                    <textarea id="journal-text" placeholder="Describe your current state..."></textarea>
+                    <button id="analyze-journal" class="btn btn-secondary">Analyze & Convert to Dots</button>
+                    <div id="analyzed-dots" class="analyzed-dots"></div>
+                </div>
+
+                <div class="entry-actions">
+                    <button id="save-entry" class="btn btn-primary">Save Entry</button>
+                    <button id="cancel-entry" class="btn btn-secondary">Cancel</button>
+
+                </div>
+            </div>
+
+            <div class="timeline-export">
+                <h3>Export Timeline</h3>
+                <div class="export-buttons">
+                    <button id="export-png" class="btn btn-success">Export PNG Mandala</button>
+                    
+                    <button id="export-log" class="btn btn-success">Export JSON Log</button>
+                    <button id="generate-report" class="btn btn-primary">Generate Report</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 3: Dot Music Composer -->
+        <div id="music-module" class="module">
+            <div class="module-header">
+                <h2>Transform Consciousness into Music</h2>
+                <p>Convert your dot timeline into melody, lyrics, and animation</p>
+            </div>
+
+            <div class="music-import">
+                <h3>Import Timeline</h3>
+                <div class="date-range-controls" style="margin-bottom: 20px;">
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                        <div>
+                            <label for="start-date" style="display: block; margin-bottom: 5px;">Start Date:</label>
+                            <input type="date" id="start-date" style="padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white;">
+                        </div>
+                        <div>
+                            <label for="end-date" style="display: block; margin-bottom: 5px;">End Date:</label>
+                            <input type="date" id="end-date" style="padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white;">
+                        </div>
+                        <button id="load-timeline-range" class="btn btn-primary" style="margin-top: 20px;">Load Timeline Data</button>
+                    </div>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <span style="opacity: 0.7;">OR</span>
+                </div>
+                <button id="import-log" class="btn btn-secondary">Import JSON Log File</button>
+                <input type="file" id="import-log-file" accept=".json" style="display: none;">
+                <div id="imported-timeline" class="imported-timeline"></div>
+            </div>
+
+            <div class="music-mapping">
+                <h3>Sound Mapping</h3>
+                <div id="mapping-grid" class="mapping-grid"></div>
+            </div>
+
+            <div class="lyrics-generation">
+                <h3>Auto-Generated Lyrics</h3>
+                <div id="generated-lyrics" class="generated-lyrics"></div>
+                <button id="regenerate-lyrics" class="btn btn-secondary" style="margin-top:10px">Regenerate</button>
+            </div>
+
+            <div class="music-playback">
+                <div class="canvas-container">
+                    <canvas id="musicCanvas" width="800" height="400"></canvas>
+                </div>
+
+                <div class="playback-settings">
+                    <div class="speed-control">
+                        <label for="speed-slider">Playback Speed: <span id="speed-display">1.0x</span></label>
+                        <input type="range" id="speed-slider" min="0.25" max="2.0" step="0.25" value="1.0" style="width: 200px;">
+                        <div style="display: flex; justify-content: space-between; width: 200px; font-size: 0.8em; margin-top: 5px; margin-left: 45px;">
+                            <span>0.25x</span>
+                            <span>0.5x</span>
+                            <span>1.0x</span>
+                            <span>1.5x</span>
+                            <span>2.0x</span>
+                        </div>
+                    </div>
+
+                    <div class="background-instruments">
+                        <h4>🎸 Background Instruments</h4>
+                        <div class="instrument-controls">
+                            <div class="instrument-control">
+                                <label>
+                                    <input type="checkbox" class="instrument-checkbox" data-instrument="drums">
+                                    🥁 Drums
+                                </label>
+                                <input type="range" class="instrument-volume" data-instrument="drums" min="0" max="100" value="30" disabled>
+                                <small>Volume: <span id="drums-volume-display">30%</span></small>
+                            </div>
+
+                            <div class="instrument-control">
+                                <label>
+                                    <input type="checkbox" class="instrument-checkbox" data-instrument="bass">
+                                    🎸 Bass
+                                </label>
+                                <input type="range" class="instrument-volume" data-instrument="bass" min="0" max="100" value="40" disabled>
+                                <small>Volume: <span id="bass-volume-display">40%</span></small>
+                            </div>
+
+                            <div class="instrument-control">
+                                <label>
+                                    <input type="checkbox" class="instrument-checkbox" data-instrument="guitar">
+                                    🎵 Guitar
+                                </label>
+                                <input type="range" class="instrument-volume" data-instrument="guitar" min="0" max="100" value="25" disabled>
+                                <small>Volume: <span id="guitar-volume-display">25%</span></small>
+                            </div>
+
+                            <div class="instrument-control">
+                                <label>
+                                    <input type="checkbox" class="instrument-checkbox" data-instrument="ambient">
+                                    🌊 Ambient Pad
+                                </label>
+                                <input type="range" class="instrument-volume" data-instrument="ambient" min="0" max="100" value="20" disabled>
+                                <small>Volume: <span id="ambient-volume-display">20%</span></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="playback-controls">
+                    <button id="toggle-music" class="btn btn-primary">
+                        <span class="btn-icon">▶</span>
+                        <span class="btn-text">Play Symphony</span>
+                    </button>
+                </div>
+
+                <div class="music-export">
+                    <h3>Export Your Symphony</h3>
+                    <div class="export-buttons">
+                        <button id="export-midi" class="btn btn-success">Export MIDI</button>
+                        <button id="export-sheet" class="btn btn-success">Export PDF Sheet</button>
+                        <button id="export-video" class="btn btn-success">Export Video</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Menu -->
+        <div class="menu-panel">
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+            <div id="dropdown-menu" class="dropdown-menu" style="display: none;">
+                <div class="menu-item" id="open-settings">
+                    <span class="menu-icon">⚙️</span>
+                    <span>Settings</span>
+                </div>
+                <div class="menu-item" id="open-documentation">
+                    <span class="menu-icon">📖</span>
+                    <span>Documentation</span>
+                </div>
+                <div class="menu-item" id="open-terms">
+                    <span class="menu-icon">📄</span>
+                    <span>Terms of Use</span>
+                </div>
+                <div class="menu-item" id="open-privacy">
+                    <span class="menu-icon">🔒</span>
+                    <span>Privacy Policy</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 600px; width: 90%;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="color: var(--primary-color); margin: 0;">⚙️ Settings</h3>
+                    <button id="close-settings" class="modal-close-btn">✕</button>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="theme-select">Theme</label>
+                    <select id="theme-select">
+                        <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <h4 style="margin: 15px 0 10px 0; color: var(--primary-color);">🤖 LLM Integration</h4>
+                <label for="llm-provider">AI Provider</label>
+                <select id="llm-provider">
+                    <option value="openai">OpenAI</option>
+                    <option value="anthropic">Anthropic (Claude)</option>
+                    <option value="gemini">Google Gemini</option>
+                    <option value="llama">Meta LLaMA (via Hugging Face)</option>
+                    <option value="deepseek">DeepSeek</option>
+                    <option value="mistral">Mistral</option>
+                    <option value="perplexity">Perplexity</option>
+                    <option value="cohere">Cohere</option>
+                    <option value="groq">Groq</option>
+                </select>
+                </div>
+
+                <div class="setting-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                        <label for="llm-api-key">API Key</label>
+                        <a id="api-key-help" href="#" target="_blank" style="color: var(--primary-color); font-size: 0.8rem; text-decoration: none;">Get API Key →</a>
+                    </div>
+                    <input type="password" id="llm-api-key" placeholder="Enter your API key" style="width: 100%; padding: 8px; border: 1px solid var(--glass-border); border-radius: 8px; background: var(--glass-bg); color: white;">
+                </div>
+
+                <div class="setting-item">
+                    <label for="llm-model">Model</label>
+                    <select id="llm-model">
+                        <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <button id="reset-all" class="btn btn-danger">Reset All Data</button>
+                </div>
+                <div class="setting-item">
+                    <button id="export-all" class="btn btn-success">Export All Data</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation Modal -->
+        <div id="documentation-modal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 800px; width: 95%; max-height: 90vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; position: sticky; top: 0; background: var(--glass-bg); padding-bottom: 15px; border-bottom: 1px solid var(--glass-border);">
+                    <h3 style="color: var(--primary-color); margin-top: 10px;margin-left:10px;">📖 Documentation</h3>
+                    <button id="close-documentation" class="modal-close-btn">✕</button>
+                </div>
+                <div id="documentation-content" style="color: white; line-height: 1.6;">
+                    Loading documentation...
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms Modal -->
+        <div id="terms-modal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 800px; width: 95%; max-height: 90vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; position: sticky; top: 0; background: var(--glass-bg); padding-bottom: 15px; border-bottom: 1px solid var(--glass-border);">
+                    <h3 style="color: var(--primary-color); margin-top: 10px;margin-left:10px;">📄 Terms of Use</h3>
+                    <button id="close-terms" class="modal-close-btn">✕</button>
+                </div>
+                <div id="terms-content" style="color: white; line-height: 1.6;">
+                    Loading terms of use...
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Modal -->
+        <div id="privacy-modal" class="modal" style="display: none;">
+            <div class="modal-content" style="max-width: 800px; width: 95%; max-height: 90vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; position: sticky; top: 0; background: var(--glass-bg); padding-bottom: 15px; border-bottom: 1px solid var(--glass-border);">
+                    <h3 style="color: var(--primary-color); margin-top: 10px;margin-left:10px;">🔒 Privacy Policy</h3>
+                    <button id="close-privacy" class="modal-close-btn">✕</button>
+                </div>
+                <div id="privacy-content" style="color: white; line-height: 1.6;">
+                    Loading privacy policy...
+                </div>
+            </div>
+        </div>
+
+        <!-- Auto-expand modal -->
+        <div id="auto-expand-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>New Emotion Detected</h3>
+                <p>We found a new keyword: "<span id="detected-keyword"></span>"</p>
+                <p>Suggested dot properties:</p>
+                <div id="suggested-dot" class="suggested-dot"></div>
+                <div class="modal-actions">
+                    <button id="accept-suggestion" class="btn btn-primary">Accept & Save</button>
+                    <button id="edit-suggestion" class="btn btn-secondary">Edit First</button>
+                    <button id="reject-suggestion" class="btn btn-danger">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
