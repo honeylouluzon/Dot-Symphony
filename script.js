@@ -691,8 +691,8 @@ class DotSymphony {
                         if (emotionLower && !emotionClusters.has(emotionLower) && !this.dictionary.find(d => d.name.toLowerCase() === emotionLower)) {
                             emotionClusters.add(emotionLower);
                             const suggestion = this.sentimentMap[emotionLower] || {
-                                color: this.generateRandomColor(),
-                                shape: this.getRandomShape(),
+                                color: this.getColorFromEmotion(emotionLower), //generateRandomColor(),
+                                shape: this.getShapeFromEmotion(emotionLower),    //getRandomShape(),
                                 emotion: emotionLower
                             };
                             newKeywords.push({
@@ -852,6 +852,89 @@ class DotSymphony {
     getRandomShape() {
         const shapes = ['circle', 'square', 'triangle', 'diamond'];
         return shapes[Math.floor(Math.random() * shapes.length)];
+    }
+
+    getColorFromEmotion(emotion) {
+    const emotionColorMap = {
+        happy: '#FFD93D',        // bright yellow
+        sad: '#4A6FA5',          // dark blue
+        angry: '#D72638',        // intense red
+        afraid: '#6A0572',       // dark purple
+        surprised: '#FFB84C',    // orange-yellow
+        disgusted: '#607D3B',    // olive green
+        proud: '#FF7F50',        // coral
+        content: '#C3F584',      // soft green
+        frustrated: '#B23A48',   // muted red
+        anxious: '#A66CFF',      // lavender
+        hopeful: '#A8E6CF',      // mint green
+        grateful: '#F9A825',     // golden
+        jealous: '#6A994E',      // moss green
+        peaceful: '#B2F7EF',     // very light blue
+        excited: '#FF9F1C',      // vivid orange
+        embarrassed: '#F1948A',  // light red
+        confused: '#B497BD',     // mauve
+        bored: '#9E9E9E',        // gray
+        ashamed: '#A4133C',      // wine red
+        guilty: '#6E5773',       // dull violet
+        curious: '#81C3D7',      // sky blue
+        overwhelmed: '#5F0F40',  // deep plum
+        insecure: '#7D5A5A',     // dull brown
+        confident: '#50C878',    // emerald green
+        nostalgic: '#FFBCBC',    // soft pink
+        inspired: '#FFB6B9',     // warm pink
+        rejected: '#5A3E36',     // muted brown
+        lonely: '#264653',       // deep teal
+        relieved: '#B8E1FF',     // icy blue
+        protective: '#4DD599'    // calm green
+    };
+
+    return emotionColorMap[emotion] || '#CCCCCC'; // fallback color (gray) if emotion not found
+    }
+
+    getShapeFromEmotion(emotion) {
+    const emotionScores = {
+        happy: { good: 10, bad: 0 },
+        sad: { good: 0, bad: 9 },
+        angry: { good: 0, bad: 10 },
+        afraid: { good: 0, bad: 9 },
+        surprised: { good: 6, bad: 4 },
+        disgusted: { good: 1, bad: 8 },
+        proud: { good: 8, bad: 1 },
+        content: { good: 9, bad: 0 },
+        frustrated: { good: 0, bad: 7 },
+        anxious: { good: 0, bad: 8 },
+        hopeful: { good: 8, bad: 1 },
+        grateful: { good: 9, bad: 0 },
+        jealous: { good: 1, bad: 9 },
+        peaceful: { good: 10, bad: 0 },
+        excited: { good: 9, bad: 1 },
+        embarrassed: { good: 2, bad: 6 },
+        confused: { good: 2, bad: 7 },
+        bored: { good: 1, bad: 5 },
+        ashamed: { good: 0, bad: 9 },
+        guilty: { good: 1, bad: 8 },
+        curious: { good: 7, bad: 1 },
+        overwhelmed: { good: 1, bad: 8 },
+        insecure: { good: 0, bad: 9 },
+        confident: { good: 9, bad: 0 },
+        nostalgic: { good: 6, bad: 3 },
+        inspired: { good: 9, bad: 1 },
+        rejected: { good: 0, bad: 9 },
+        lonely: { good: 0, bad: 8 },
+        relieved: { good: 8, bad: 2 },
+        protective: { good: 7, bad: 2 }
+    };
+
+    const shapes = ['circle', 'diamond', 'triangle', 'square', 'star']; // increasing edges
+    const badScore = emotionScores[emotion]?.bad;
+
+    if (badScore === undefined) return 'circle'; // fallback shape
+
+    if (badScore <= 1) return shapes[0];      // circle
+    if (badScore <= 3) return shapes[1];      // diamond
+    if (badScore <= 6) return shapes[2];      // triangle
+    if (badScore <= 8) return shapes[3];      // square
+    return shapes[4];                         // star
     }
 
     async generateLLMSoundMapping(dot) {
