@@ -626,17 +626,37 @@ class DotSymphony {
 
         // More sophisticated emotion detection
         const emotionPatterns = {
-            stressed: { pattern: /stress|overwhelm|pressure|tense|strain/, suggestion: this.sentimentMap.anxious },
-            excited: { pattern: /excit|thrill|energetic|pump/, suggestion: this.sentimentMap.excited },
-            content: { pattern: /content|satisf|fulfill|complete/, suggestion: this.sentimentMap.calm },
-            frustrated: { pattern: /frustrat|annoyed|irritat|bothered/, suggestion: this.sentimentMap.angry },
-            hopeful: { pattern: /hope|optimis|positive|bright/, suggestion: this.sentimentMap.joy },
-            tired: { pattern: /tired|exhaust|drain|weary|fatigue/, suggestion: { color: '#6C5CE7', shape: 'circle', emotion: 'tired' } },
-            motivated: { pattern: /motivat|inspir|determin|driven/, suggestion: { color: '#00B894', shape: 'triangle', emotion: 'motivated' } },
-            nostalgic: { pattern: /nostalgi|remember|past|memory/, suggestion: { color: '#A29BFE', shape: 'circle', emotion: 'nostalgic' } },
-            creative: { pattern: /creativ|imaginat|artistic|inspir/, suggestion: { color: '#FD79A8', shape: 'diamond', emotion: 'creative' } },
-            social: { pattern: /social|connect|friend|together/, suggestion: { color: '#FDCB6E', shape: 'circle', emotion: 'social' } }
-        };
+            happy:       { pattern: /happy|joy|cheer|delight/,            suggestion: { color: '#FFD93D', shape: 'circle', emotion: 'happy' } },
+            grateful:    { pattern: /grate|thank|appreciat/,              suggestion: { color: '#F9A825', shape: 'circle', emotion: 'grateful' } },
+            hopeful:     { pattern: /hope|optimis|positive|bright/,       suggestion: { color: '#A8E6CF', shape: 'circle', emotion: 'hopeful' } },
+            proud:       { pattern: /proud|accomplish|achiev/,            suggestion: { color: '#FF7F50', shape: 'triangle', emotion: 'proud' } },
+            excited:     { pattern: /excit|thrill|energetic|pump/,        suggestion: { color: '#FF9F1C', shape: 'circle', emotion: 'excited' } },
+            inspired:    { pattern: /inspir|aspire|uplift/,               suggestion: { color: '#FFB6B9', shape: 'circle', emotion: 'inspired' } },
+            motivated:   { pattern: /motivat|determin|driven/,            suggestion: { color: '#00B894', shape: 'triangle', emotion: 'motivated' } },
+            content:     { pattern: /content|satisf|fulfill|complete/,    suggestion: { color: '#C3F584', shape: 'circle', emotion: 'content' } },
+            creative:    { pattern: /creativ|imaginat|artistic/,          suggestion: { color: '#FD79A8', shape: 'diamond', emotion: 'creative' } },
+            social:      { pattern: /social|connect|friend|together/,     suggestion: { color: '#FDCB6E', shape: 'circle', emotion: 'social' } },
+            peaceful:    { pattern: /peace|calm|relax/,                   suggestion: { color: '#B2F7EF', shape: 'circle', emotion: 'peaceful' } },
+            nostalgic:   { pattern: /nostalgi|remember|past|memory/,      suggestion: { color: '#A29BFE', shape: 'circle', emotion: 'nostalgic' } },
+            curious:     { pattern: /curious|interest|explor/,            suggestion: { color: '#81C3D7', shape: 'triangle', emotion: 'curious' } },
+            protective:  { pattern: /protect|guard|defend/,               suggestion: { color: '#4DD599', shape: 'diamond', emotion: 'protective' } },
+            sad:         { pattern: /sad|unhappy|down|blue/,              suggestion: { color: '#4A6FA5', shape: 'square', emotion: 'sad' } },
+            anxious:     { pattern: /anxi|nervous|uneasy/,                 suggestion: { color: '#A66CFF', shape: 'square', emotion: 'anxious' } },
+            scared:      { pattern: /scare|afraid|fear/,                  suggestion: { color: '#6A0572', shape: 'square', emotion: 'scared' } },
+            frustrated:  { pattern: /frustrat|annoy|irritat|bother/,      suggestion: { color: '#B23A48', shape: 'square', emotion: 'frustrated' } },
+            helpless:    { pattern: /helpless|powerless|stuck/,           suggestion: { color: '#5F0F40', shape: 'square', emotion: 'helpless' } },
+            overwhelmed: { pattern: /overwhelm|flooded|overload/,         suggestion: { color: '#5F0F40', shape: 'hexagon', emotion: 'overwhelmed' } },
+            stressed:    { pattern: /stress|tense|pressure|strain/,       suggestion: { color: '#FF6B6B', shape: 'hexagon', emotion: 'stressed' } },
+            ashamed:     { pattern: /ashamed|embarrass|regret/,           suggestion: { color: '#A4133C', shape: 'hexagon', emotion: 'ashamed' } },
+            tired:       { pattern: /tired|exhaust|drain|weary|fatigue/,  suggestion: { color: '#6C5CE7', shape: 'circle', emotion: 'tired' } },
+            bored:       { pattern: /bored|dull|apathetic/,               suggestion: { color: '#9E9E9E', shape: 'square', emotion: 'bored' } },
+            lonely:      { pattern: /lonely|alone|isolat/,                suggestion: { color: '#264653', shape: 'square', emotion: 'lonely' } },
+            insecure:    { pattern: /insecure|doubt|worthless/,           suggestion: { color: '#7D5A5A', shape: 'square', emotion: 'insecure' } },
+            guilty:      { pattern: /guilt|remorse|blame/,                suggestion: { color: '#6E5773', shape: 'square', emotion: 'guilty' } },
+            rejected:    { pattern: /reject|excluded|abandon/,            suggestion: { color: '#5A3E36', shape: 'square', emotion: 'rejected' } },
+            confused:    { pattern: /confus|unclear|lost/,                suggestion: { color: '#B497BD', shape: 'diamond', emotion: 'confused' } },
+            calm:        { pattern: /calm|zen|still/,                     suggestion: { color: '#A3E4D7', shape: 'circle', emotion: 'calm' } }
+};
 
         // Check for existing dots
         words.forEach(word => {
