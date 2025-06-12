@@ -879,7 +879,7 @@ Requirements:
 Available instruments: piano, guitar, synth, flute, strings, drums, bass, bells, harp
 Available scales: major (bright/happy), minor (sad/dark), pentatonic (calm/eastern), blues (soulful/expressive)
 
-Return JSON format:
+Do not say anything and just return this JSON format:
 {
   "instrument": "chosen_instrument",
   "scale": "chosen_scale",
@@ -983,7 +983,7 @@ Create a melody that:
 4. Uses intervals and chord progressions suitable for consciousness/meditation themes
 5. Balances repetition with variation for memorability
 
-Return a JSON array of ${syllables.length} notes with format:
+Do not say anything and just return a JSON array of ${syllables.length} notes with format:
 [{"note": "C4", "duration": 0.5, "emotion": "calm"}, ...]
 
 Use standard musical notation (C4, D4, E4, etc.) and durations in seconds.`;
@@ -1113,7 +1113,7 @@ Requirements:
 4. Create mathematical progression that reflects consciousness journey
 5. Synchronize with emotional timeline progression
 
-Return JSON format:
+Do not say anything and just return this JSON format:
 {
   "notes": [
     {
@@ -2925,7 +2925,7 @@ Requirements:
 6. Focus on inner growth and self-awareness themes
 7. Make it personal and introspective
 
-Structure the lyrics to synchronize well with musical notes, using short, meaningful phrases that can be sung melodically.`;
+Structure the lyrics to synchronize well with musical notes, using short, meaningful phrases that can be sung melodically. Do not say anything and just provide the lyrics`;
 
                 const llmResult = await this.generateLyricsWithLLM(prompt);
                 
@@ -3296,7 +3296,7 @@ Requirements:
 3. Synchronize with main melody notes
 4. Consider emotional progression
 
-Return JSON format:
+Do not say anything and just return this JSON format:
 {
   "pattern": [
     {"beat": 1, "intensity": 0.8, "variation": "kick"},
