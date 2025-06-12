@@ -241,7 +241,13 @@ generateLLMEnhancedMelody()         // Mathematical composition
 2. Create account and obtain API key:
    - **OpenAI**: https://platform.openai.com/api-keys
    - **Anthropic**: https://console.anthropic.com/account/keys
-   - **Google**: https://makersuite.google.com/app/apikey
+   - **Gemini**: https://makersuite.google.com/app/apikey
+   - **Deepseek**: https://platform.deepseek.com/api-keys
+   - **Llama**: https://huggingface.co/meta-llama // Usually hosted via Hugging Face
+   - **Mistral**: https://console.mistral.ai/api-keys
+   - **Perplexity**: https://www.perplexity.ai/settings/api
+   - **Cohere**: https://dashboard.cohere.com/api-keys
+   - **Groq**: https://console.groq.com/keys
 3. Enter API key in Settings
 4. Select appropriate model
 
