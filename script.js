@@ -1017,15 +1017,38 @@ Do not say anything and just return this JSON format:
         
         // Enhanced template mapping with better emotional intelligence
         const emotionMappings = {
-            joy: { instrument: 'bells', scale: 'major', volume: 85, noteLength: 'quarter' },
-            happy: { instrument: 'piano', scale: 'major', volume: 80, noteLength: 'half' },
-            excited: { instrument: 'synth', scale: 'major', volume: 90, noteLength: 'quarter' },
-            calm: { instrument: 'flute', scale: 'pentatonic', volume: 60, noteLength: 'whole' },
-            peaceful: { instrument: 'harp', scale: 'pentatonic', volume: 55, noteLength: 'whole' },
-            sad: { instrument: 'strings', scale: 'minor', volume: 65, noteLength: 'whole' },
-            anxious: { instrument: 'synth', scale: 'minor', volume: 75, noteLength: 'quarter' },
-            angry: { instrument: 'drums', scale: 'blues', volume: 95, noteLength: 'quarter' },
-            focused: { instrument: 'piano', scale: 'minor', volume: 70, noteLength: 'half' }
+            joy:         { instrument: 'bells',     scale: 'major',     volume: 85, noteLength: 'quarter' },
+            happy:       { instrument: 'piano',     scale: 'major',     volume: 80, noteLength: 'half' },
+            excited:     { instrument: 'synth',     scale: 'major',     volume: 90, noteLength: 'eighth' },
+            hopeful:     { instrument: 'violin',    scale: 'major',     volume: 75, noteLength: 'half' },
+            proud:       { instrument: 'trumpet',   scale: 'major',     volume: 85, noteLength: 'quarter' },
+            motivated:   { instrument: 'guitar',    scale: 'major',     volume: 85, noteLength: 'quarter' },
+            inspired:    { instrument: 'violin',    scale: 'major',     volume: 80, noteLength: 'half' },
+            grateful:    { instrument: 'harp',      scale: 'pentatonic',volume: 70, noteLength: 'half' },
+            calm:        { instrument: 'flute',     scale: 'pentatonic',volume: 60, noteLength: 'whole' },
+            peaceful:    { instrument: 'harp',      scale: 'pentatonic',volume: 55, noteLength: 'whole' },
+            content:     { instrument: 'acoustic',  scale: 'major',     volume: 65, noteLength: 'whole' },
+            social:      { instrument: 'marimba',   scale: 'major',     volume: 75, noteLength: 'quarter' },
+            curious:     { instrument: 'xylophone', scale: 'lydian',     volume: 70, noteLength: 'eighth' },
+            creative:    { instrument: 'electric piano', scale: 'dorian', volume: 80, noteLength: 'eighth' },
+            nostalgic:   { instrument: 'music box', scale: 'minor',     volume: 60, noteLength: 'half' },
+            sad:         { instrument: 'strings',   scale: 'minor',     volume: 65, noteLength: 'whole' },
+            anxious:     { instrument: 'synth',     scale: 'minor',     volume: 75, noteLength: 'sixteenth' },
+            scared:      { instrument: 'viola',     scale: 'minor',     volume: 80, noteLength: 'eighth' },
+            angry:       { instrument: 'drums',     scale: 'blues',     volume: 95, noteLength: 'quarter' },
+            frustrated:  { instrument: 'bass',      scale: 'blues',     volume: 90, noteLength: 'eighth' },
+            overwhelmed: { instrument: 'organ',     scale: 'minor',     volume: 88, noteLength: 'sixteenth' },
+            helpless:    { instrument: 'cello',     scale: 'minor',     volume: 60, noteLength: 'whole' },
+            stressed:    { instrument: 'drum kit',  scale: 'minor',     volume: 85, noteLength: 'eighth' },
+            ashamed:     { instrument: 'low synth', scale: 'phrygian',  volume: 65, noteLength: 'whole' },
+            tired:       { instrument: 'pad',       scale: 'minor',     volume: 55, noteLength: 'whole' },
+            lonely:      { instrument: 'cello',     scale: 'minor',     volume: 60, noteLength: 'whole' },
+            bored:       { instrument: 'organ',     scale: 'minor',     volume: 50, noteLength: 'whole' },
+            insecure:    { instrument: 'bass synth',scale: 'locrian',   volume: 60, noteLength: 'eighth' },
+            confused:    { instrument: 'fx pad',    scale: 'chromatic', volume: 70, noteLength: 'eighth' },
+            rejected:    { instrument: 'pizzicato', scale: 'minor',     volume: 65, noteLength: 'eighth' },
+            focused:     { instrument: 'piano',     scale: 'dorian',    volume: 70, noteLength: 'half' },
+            protective:  { instrument: 'trombone',  scale: 'major',     volume: 80, noteLength: 'quarter' }
         };
 
         const mapping = emotionMappings[emotion] || {
