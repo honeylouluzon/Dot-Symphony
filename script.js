@@ -3594,45 +3594,74 @@ Create exactly ${Math.min(noteCount, 16)} beat patterns.`;
     }
 
     createBassPattern(volume) {
-        const bassFreqs = [60, 65, 70, 75, 80];
-        let beatIndex = 0;
-        
-        const playBassBeat = () => {
-            if (!this.isPlaying) return;
-            
-            const frequency = bassFreqs[beatIndex % bassFreqs.length];
-            
-            const osc = this.audioContext.createOscillator();
-            const gain = this.audioContext.createGain();
-            const filter = this.audioContext.createBiquadFilter();
-            
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.audioContext.destination);
-            
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
-            
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(150, this.audioContext.currentTime);
-            
-            gain.gain.setValueAtTime(0, this.audioContext.currentTime);
-            gain.gain.linearRampToValueAtTime(volume * 0.9, this.audioContext.currentTime + 0.01);
-            gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.8);
-            
-            osc.start();
-            osc.stop(this.audioContext.currentTime + 0.8);
-            
-            this.backgroundOscillators.push(osc);
-            beatIndex++;
-        };
-        
-        const bassBPM = 60 * this.playbackSpeed;
-        const bassInterval = (60 / bassBPM) * 1000;
-        
-        playBassBeat();
-        const interval = setInterval(playBassBeat, bassInterval);
-        this.backgroundIntervals.push(interval);
+    const emotionContext = this.extractEmotionContext();
+    const emotion = emotionContext.emotion || 'calm'; // fallback
+    const emotionScaleMap = {
+        joy: 'major', happy: 'major', excited: 'lydian', calm: 'pentatonic', peaceful: 'pentatonic',
+        sad: 'minor', anxious: 'minor', angry: 'blues', focused: 'dorian', confused: 'chromatic',
+        love: 'major', grateful: 'major', surprised: 'mixolydian', scared: 'phrygian', tired: 'minor',
+        lonely: 'minor', curious: 'dorian', hopeful: 'major', frustrated: 'blues', proud: 'lydian',
+        embarrassed: 'minor', shy: 'pentatonic', energetic: 'mixolydian', relaxed: 'dorian',
+        bored: 'minor', nostalgic: 'major', overwhelmed: 'chromatic', determined: 'dorian',
+        disappointed: 'minor'
+    };
+
+    const scaleFrequencies = {
+        major: [130.81, 164.81, 196.00, 261.63, 329.63, 392.00],
+        minor: [130.81, 155.56, 174.61, 220.00, 261.63, 311.13],
+        pentatonic: [130.81, 146.83, 174.61, 196.00, 220.00],
+        blues: [130.81, 155.56, 164.81, 174.61, 196.00, 233.08],
+        dorian: [130.81, 146.83, 164.81, 174.61, 196.00, 220.00],
+        lydian: [130.81, 146.83, 164.81, 185.00, 196.00, 220.00],
+        mixolydian: [130.81, 146.83, 164.81, 174.61, 196.00, 207.65],
+        phrygian: [130.81, 138.59, 164.81, 174.61, 196.00, 220.00],
+        chromatic: [130.81, 138.59, 146.83, 155.56, 164.81, 174.61]
+    };
+
+    const scaleName = emotionScaleMap[emotion] || 'major';
+    const scale = scaleFrequencies[scaleName];
+
+    // Shift scale down 1 or 2 octaves for bass (e.g., divide by 2 or 4)
+    const bassFreqs = scale.map(freq => freq / 2).filter(f => f >= 40 && f <= 120);
+
+    let beatIndex = 0;
+
+    const playBassBeat = () => {
+        if (!this.isPlaying) return;
+
+        const frequency = bassFreqs[beatIndex % bassFreqs.length];
+
+        const osc = this.audioContext.createOscillator();
+        const gain = this.audioContext.createGain();
+        const filter = this.audioContext.createBiquadFilter();
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.audioContext.destination);
+
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(150, this.audioContext.currentTime);
+
+        gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+        gain.gain.linearRampToValueAtTime(volume * 0.9, this.audioContext.currentTime + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 0.8);
+
+        osc.start();
+        osc.stop(this.audioContext.currentTime + 0.8);
+
+        this.backgroundOscillators.push(osc);
+        beatIndex++;
+    };
+
+    const bassBPM = 60 * this.playbackSpeed;
+    const bassInterval = (60 / bassBPM) * 1000;
+
+    playBassBeat();
+    const interval = setInterval(playBassBeat, bassInterval);
+    this.backgroundIntervals.push(interval);
     }
 
     playLLMGuitarBeat(pattern, volume) {
