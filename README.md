@@ -3,7 +3,9 @@
 
 Dot Symphony is a revolutionary web application that transforms human consciousness and emotional states into visual art and musical compositions. This comprehensive tool combines emotional tracking, visual representation, and AI-powered music generation to create a unique digital wellness experience.
 
-[**LIVE VIEW**](https://honeylouluzon.github.io/Dot-Symphony/)
+[**LIVE VIEW**](https://htmlpreview.github.io/?https://github.com/honeylouluzon/Dot-Symphony/blob/main/index.html)
+
+[**GITHUB PAGES**](https://honeylouluzon.github.io/Dot-Symphony/)
 
 ## 🌟 Overview
 
