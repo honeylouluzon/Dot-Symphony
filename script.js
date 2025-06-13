@@ -3939,47 +3939,69 @@ Create exactly ${Math.min(noteCount, 16)} beat patterns.`;
     }
 
     createGuitarPattern(volume) {
-        const chordFreqs = [
-            [130.8, 164.8, 196.0], // C major
-            [146.8, 185.0, 220.0], // D minor
-            [164.8, 207.7, 246.9], // E minor
-            [174.6, 220.0, 261.6]  // F major
-        ];
-        let chordIndex = 0;
-        const strumInterval = (60 / 60) / this.playbackSpeed; // 60 BPM adjusted for speed
+    const emotionContext = this.extractEmotionContext(); // e.g., { emotion: 'joy', scales: ['major'] }
+    const scales = emotionContext.scales;
+
+    // Full scale to frequency map
+    const scaleFrequencies = {
+        major:      [130.81, 164.81, 196.00, 261.63, 329.63, 392.00],
+        minor:      [130.81, 155.56, 174.61, 220.00, 261.63, 311.13],
+        pentatonic: [130.81, 146.83, 174.61, 196.00, 220.00],
+        blues:      [130.81, 155.56, 164.81, 174.61, 196.00, 233.08],
+        dorian:     [130.81, 146.83, 164.81, 174.61, 196.00, 220.00],
+        lydian:     [130.81, 146.83, 164.81, 185.00, 196.00, 220.00],
+        mixolydian: [130.81, 146.83, 164.81, 174.61, 196.00, 207.65],
+        phrygian:   [130.81, 138.59, 164.81, 174.61, 196.00, 220.00],
+        chromatic:  [130.81, 138.59, 146.83, 155.56, 164.81, 174.61]
+    };
+
+    // Build chord list using selected scales
+    const chordFreqs = scales.flatMap(scale => {
+        const freqs = scaleFrequencies[scale];
+        if (!freqs) return [];
         
-        const playChord = () => {
-            if (!this.isPlaying) return;
-            
-            const chord = chordFreqs[chordIndex];
-            
-            chord.forEach((freq, i) => {
-                setTimeout(() => {
-                    const osc = this.audioContext.createOscillator();
-                    const gain = this.audioContext.createGain();
-                    
-                    osc.connect(gain);
-                    gain.connect(this.audioContext.destination);
-                    
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
-                    
-                    gain.gain.setValueAtTime(0, this.audioContext.currentTime);
-                    gain.gain.linearRampToValueAtTime(volume * 0.7, this.audioContext.currentTime + 0.01);
-                    gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 1.0);
-                    
-                    osc.start();
-                    osc.stop(this.audioContext.currentTime + 1.0);
-                    
-                    this.backgroundOscillators.push(osc);
-                }, i * 50); // Slight strum delay
-            });
-            
-            chordIndex = (chordIndex + 1) % chordFreqs.length;
-            setTimeout(playChord, strumInterval * 1000);
-        };
-        
-        playChord();
+        const chords = [];
+        for (let i = 0; i < freqs.length - 2; i++) {
+            chords.push([freqs[i], freqs[i + 1], freqs[i + 2]]);
+        }
+        return chords;
+    });
+
+    let chordIndex = 0;
+    const strumInterval = (60 / 60) / this.playbackSpeed; // BPM adjusted for speed
+
+    const playChord = () => {
+        if (!this.isPlaying || chordFreqs.length === 0) return;
+
+        const chord = chordFreqs[chordIndex];
+
+        chord.forEach((freq, i) => {
+            setTimeout(() => {
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+
+                osc.connect(gain);
+                gain.connect(this.audioContext.destination);
+
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
+
+                gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+                gain.gain.linearRampToValueAtTime(volume * 0.7, this.audioContext.currentTime + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 1.0);
+
+                osc.start();
+                osc.stop(this.audioContext.currentTime + 1.0);
+
+                this.backgroundOscillators.push(osc);
+            }, i * 50); // Slight strum delay
+        });
+
+        chordIndex = (chordIndex + 1) % chordFreqs.length;
+        setTimeout(playChord, strumInterval * 1000);
+    };
+
+    playChord();
     }
 
     createAmbientPattern(volume) {
