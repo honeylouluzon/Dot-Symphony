@@ -3636,38 +3636,69 @@ Create exactly ${Math.min(noteCount, 16)} beat patterns.`;
     }
 
     playLLMGuitarBeat(pattern, volume) {
-        const chordProgressions = [
-            [130.8, 164.8, 196.0], // C major
-            [146.8, 185.0, 220.0], // D minor
-            [164.8, 207.7, 246.9], // E minor
-            [174.6, 220.0, 261.6]  // F major
-        ];
-        
-        const chordIndex = (pattern.beat - 1) % chordProgressions.length;
-        const chord = chordProgressions[chordIndex];
-        const intensity = pattern.intensity || 0.7;
-        
-        chord.forEach((freq, i) => {
-            setTimeout(() => {
-                const osc = this.audioContext.createOscillator();
-                const gain = this.audioContext.createGain();
-                
-                osc.connect(gain);
-                gain.connect(this.audioContext.destination);
-                
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
-                
-                gain.gain.setValueAtTime(0, this.audioContext.currentTime);
-                gain.gain.linearRampToValueAtTime(volume * intensity * 0.7, this.audioContext.currentTime + 0.01);
-                gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 1.0);
-                
-                osc.start();
-                osc.stop(this.audioContext.currentTime + 1.0);
-                
-                this.backgroundOscillators.push(osc);
-            }, i * 50);
-        });
+    const chordProgressions = {
+        major: [
+            [130.8, 164.8, 196.0],
+            [196.0, 246.9, 293.7],
+            [174.6, 220.0, 261.6]
+        ],
+        minor: [
+            [130.8, 155.6, 196.0],
+            [146.8, 174.6, 220.0],
+            [164.8, 196.0, 246.9]
+        ],
+        blues: [
+            [130.8, 155.6, 174.6],
+            [146.8, 174.6, 185.0],
+            [164.8, 185.0, 196.0]
+        ],
+        pentatonic: [
+            [130.8, 164.8, 196.0],
+            [146.8, 185.0, 220.0],
+            [174.6, 220.0, 261.6]
+        ],
+        lydian: [
+            [130.8, 164.8, 185.0],
+            [146.8, 185.0, 207.7],
+            [164.8, 207.7, 233.1]
+        ],
+        phrygian: [
+            [130.8, 155.6, 174.6],
+            [146.8, 174.6, 196.0]
+        ],
+        wholeTone: [
+            [130.8, 146.8, 164.8],
+            [164.8, 185.0, 207.7]
+        ]
+    };
+
+    const scale = pattern.scale || 'major'; // fallback to 'major'
+    const progressions = chordProgressions[scale] || chordProgressions['major'];
+    const chordIndex = (pattern.beat - 1) % progressions.length;
+    const chord = progressions[chordIndex];
+    const intensity = pattern.intensity || 0.7;
+
+    chord.forEach((freq, i) => {
+        setTimeout(() => {
+            const osc = this.audioContext.createOscillator();
+            const gain = this.audioContext.createGain();
+
+            osc.connect(gain);
+            gain.connect(this.audioContext.destination);
+
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(freq, this.audioContext.currentTime);
+
+            gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+            gain.gain.linearRampToValueAtTime(volume * intensity * 0.7, this.audioContext.currentTime + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 1.0);
+
+            osc.start();
+            osc.stop(this.audioContext.currentTime + 1.0);
+
+            this.backgroundOscillators.push(osc);
+        }, i * 50);
+    });
     }
 
     playLLMAmbientBeat(pattern, volume) {
