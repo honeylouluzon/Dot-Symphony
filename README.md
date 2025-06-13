@@ -18,6 +18,7 @@ Dot Symphony consists of three integrated modules that work together to create a
 ## 🎯 Core Features
 
 ### Dot Language Composer
+![Dot Language](dotlang.jpeg)
 - **Custom Dot Creation**: Build personalized emotional vocabulary with custom colors, shapes, and animations
 - **Visual Properties**: Choose from circles, squares, triangles, and diamonds
 - **Animation Effects**: Pulse, fade, rotate, and bounce animations
@@ -25,6 +26,7 @@ Dot Symphony consists of three integrated modules that work together to create a
 - **Real-time Preview**: See dot changes instantly
 
 ### Mind State Tracker
+![Mind State](mindstate.jpeg)
 - **24-Hour Clock Interface**: Interactive circular timeline for hourly tracking
 - **Dual Entry Methods**: Select existing dots or write journal entries
 - **AI Analysis**: LLM-powered emotion detection from text
@@ -33,6 +35,7 @@ Dot Symphony consists of three integrated modules that work together to create a
 - **Export Options**: PNG mandalas, animated GIFs, JSON data, and comprehensive reports
 
 ### Dot Music Composer
+![Dot Music](dotmusic.jpeg)
 - **Timeline Import**: Load data from date ranges or JSON files
 - **Sound Mapping**: Map emotions to instruments and musical scales
 - **AI-Enhanced Composition**: LLM-powered melody generation using mathematical concepts
