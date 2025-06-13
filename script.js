@@ -5927,25 +5927,38 @@ Create exactly ${Math.min(noteCount, 16)} beat patterns.`;
 
     // LLM INTEGRATION METHODS
     async analyzeLLM(text) {
-        if (!this.llmSettings.apiKey || this.llmSettings.apiKey.trim() === '') {
-            throw new Error('No API key configured');
-        }
+    if (!this.llmSettings.apiKey || this.llmSettings.apiKey.trim() === '') {
+        throw new Error('No API key configured');
+    }
 
-        const prompt = `Analyze this journal entry and identify ALL emotions, feelings, and mental states mentioned or implied. Be comprehensive and include subtle emotions. Return ONLY a valid JSON object with an "emotions" array containing all detected emotions/feelings as strings. Include basic emotions (happy, sad, angry, fear, surprise, disgust) as well as complex emotions (anxious, excited, nostalgic, frustrated, motivated, creative, peaceful, energetic, melancholic, hopeful, confused, focused, tired, stressed, content, grateful, lonely, confident, overwhelmed, inspired, etc.). 
+    const prompt = `Analyze this journal entry and identify ALL emotions, feelings, and mental states mentioned or implied. Be comprehensive and include subtle emotions. Return ONLY a valid JSON object with an "emotions" array containing all detected emotions/feelings as strings. Include basic emotions (happy, sad, angry, fear, surprise, disgust) as well as complex emotions (anxious, excited, nostalgic, frustrated, motivated, creative, peaceful, energetic, melancholic, hopeful, confused, focused, tired, stressed, content, grateful, lonely, confident, overwhelmed, inspired, etc.). 
 
 Text to analyze: "${text}"
 
 Expected format: {"emotions": ["emotion1", "emotion2", "emotion3"]}`;
 
-        if (this.llmSettings.provider === 'openai') {
+    switch (this.llmSettings.provider) {
+        case 'openai':
             return await this.analyzeOpenAI(prompt);
-        } else if (this.llmSettings.provider === 'anthropic') {
+        case 'anthropic':
             return await this.analyzeAnthropic(prompt);
-        } else if (this.llmSettings.provider === 'gemini') {
+        case 'gemini':
             return await this.analyzeGemini(prompt);
-        }
-
-        throw new Error('Unsupported LLM provider');
+        case 'deepseek':
+            return await this.analyzeDeepSeek(prompt);
+        case 'llama':
+            return await this.analyzeLLaMA(prompt);
+        case 'mistral':
+            return await this.analyzeMistral(prompt);
+        case 'perplexity':
+            return await this.analyzePerplexity(prompt);
+        case 'cohere':
+            return await this.analyzeCohere(prompt);
+        case 'groq':
+            return await this.analyzeGroq(prompt);
+        default:
+            throw new Error(`Unsupported LLM provider: ${this.llmSettings.provider}`);
+    }
     }
 
     async generateLyricsWithLLM(prompt) {
