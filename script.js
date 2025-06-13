@@ -4005,43 +4005,66 @@ Create exactly ${Math.min(noteCount, 16)} beat patterns.`;
     }
 
     createAmbientPattern(volume) {
-        const ambientFreqs = [220, 330, 440, 550];
-        let freqIndex = 0;
-        const ambientInterval = (60 / 30) / this.playbackSpeed; // 30 BPM adjusted for speed
-        
-        const playAmbient = () => {
-            if (!this.isPlaying) return;
-            
-            const osc = this.audioContext.createOscillator();
-            const gain = this.audioContext.createGain();
-            const filter = this.audioContext.createBiquadFilter();
-            
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.audioContext.destination);
-            
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(ambientFreqs[freqIndex], this.audioContext.currentTime);
-            
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(1000, this.audioContext.currentTime);
-            filter.Q.setValueAtTime(1, this.audioContext.currentTime);
-            
-            gain.gain.setValueAtTime(0, this.audioContext.currentTime);
-            gain.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.5);
-            gain.gain.linearRampToValueAtTime(volume * 0.7, this.audioContext.currentTime + 1.5);
-            gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 2.0);
-            
-            osc.start();
-            osc.stop(this.audioContext.currentTime + 2.0);
-            
-            this.backgroundOscillators.push(osc);
-            
-            freqIndex = (freqIndex + 1) % ambientFreqs.length;
-            setTimeout(playAmbient, ambientInterval * 1000);
-        };
-        
-        playAmbient();
+    const emotionContext = this.extractEmotionContext(); // { emotion: 'hope', scales: ['lydian'] }
+    const scales = emotionContext.scales;
+
+    // Scale definitions with ambient-friendly smooth tones
+    const scaleFrequencies = {
+        major:      [130.81, 164.81, 196.00, 261.63, 329.63, 392.00],
+        minor:      [130.81, 155.56, 174.61, 220.00, 261.63, 311.13],
+        pentatonic: [130.81, 146.83, 174.61, 196.00, 220.00],
+        blues:      [130.81, 155.56, 164.81, 174.61, 196.00, 233.08],
+        dorian:     [130.81, 146.83, 164.81, 174.61, 196.00, 220.00],
+        lydian:     [130.81, 146.83, 164.81, 185.00, 196.00, 220.00],
+        mixolydian: [130.81, 146.83, 164.81, 174.61, 196.00, 207.65],
+        phrygian:   [130.81, 138.59, 164.81, 174.61, 196.00, 220.00],
+        chromatic:  [130.81, 138.59, 146.83, 155.56, 164.81, 174.61]
+    };
+
+    // Build ambient frequencies from selected scale(s)
+    const ambientFreqs = scales.flatMap(scale => {
+        const freqs = scaleFrequencies[scale];
+        return freqs ? freqs.slice(1, 5) : []; // Grab a calm mid-range set
+    });
+
+    if (ambientFreqs.length === 0) return; // Don't play if no scale matched
+
+    let freqIndex = 0;
+    const ambientInterval = (60 / 30) / this.playbackSpeed; // 30 BPM adjusted
+
+    const playAmbient = () => {
+        if (!this.isPlaying) return;
+
+        const osc = this.audioContext.createOscillator();
+        const gain = this.audioContext.createGain();
+        const filter = this.audioContext.createBiquadFilter();
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this.audioContext.destination);
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(ambientFreqs[freqIndex], this.audioContext.currentTime);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1000, this.audioContext.currentTime);
+        filter.Q.setValueAtTime(1, this.audioContext.currentTime);
+
+        gain.gain.setValueAtTime(0, this.audioContext.currentTime);
+        gain.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.5);
+        gain.gain.linearRampToValueAtTime(volume * 0.7, this.audioContext.currentTime + 1.5);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.audioContext.currentTime + 2.0);
+
+        osc.start();
+        osc.stop(this.audioContext.currentTime + 2.0);
+
+        this.backgroundOscillators.push(osc);
+
+        freqIndex = (freqIndex + 1) % ambientFreqs.length;
+        setTimeout(playAmbient, ambientInterval * 1000);
+    };
+
+    playAmbient();
     }
 
     renderMusicVisualization() {
