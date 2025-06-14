@@ -356,8 +356,6 @@ Add consciousness analytics:
 
 🎯 Dot Generation Intelligence: The current emotion detection in the app already leverages an LLM to identify the emotional tone of journal entries. However, shape, color, and animation are still generated using static datasets. In the future, the goal is to make **LLM-generated visual dot emojis** fully dynamic, where:
 
----
-
 ### 1. 🔷 Shape Based on Emotional “Badness” Score
 
 The shape of each dot emoji will reflect the perceived negativity or "badness" of an emotion using a **scoring system from 1 to 10**:
@@ -368,8 +366,6 @@ The shape of each dot emoji will reflect the perceived negativity or "badness" o
   - A moderately negative emotion (e.g., **"annoyed"**) might score **5–6**, rendered as a **hexagon**.
   - A highly negative emotion (e.g., **"hate"**) might score **10**, forming a **decagon**.
 - This scoring could be based on LLM outputs or combined with datasets like **NRC Emotion Lexicon** or **SentiWordNet**.
-
----
 
 ### 2. 🌈 Color Based on Emotion–Hue Mapping Theory
 
@@ -387,8 +383,6 @@ The emotional color of the dot will no longer be random but based on **psycholog
 - **Single emotion** → mapped to a defined hue (e.g., anger → red)
 - **Blended emotion** → mix hues (e.g., joy + anger → orange)
 - LLM-generated emotional tags will be translated into RGB/HSB values using this theory for richer expression.
-
----
 
 ### 3. 💫 Animation Based on Arousal Level or Heartbeat Analogy
 
@@ -408,8 +402,6 @@ Future improvements aim to simulate the **emotional energy** through movement, i
 - **Shake/jitter** → added to intense emotions like panic or rage
 
 These dynamic visual features aim to create a **more emotionally expressive and immersive experience**.
-
----
 
 ### 4. Planned Features
 - **Collaborative Sessions**: Multi-user consciousness tracking
