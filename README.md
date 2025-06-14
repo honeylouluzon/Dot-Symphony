@@ -354,7 +354,64 @@ Add consciousness analytics:
 
 ## 🔮 Future Enhancements
 
-### Planned Features
+🎯 Dot Generation Intelligence: The current emotion detection in the app already leverages an LLM to identify the emotional tone of journal entries. However, shape, color, and animation are still generated using static datasets. In the future, the goal is to make **LLM-generated visual dot emojis** fully dynamic, where:
+
+---
+
+### 1. 🔷 Shape Based on Emotional “Badness” Score
+
+The shape of each dot emoji will reflect the perceived negativity or "badness" of an emotion using a **scoring system from 1 to 10**:
+
+- This score can be derived from sentiment analysis or a pre-defined **emotion intensity scale**.
+- Example:
+  - A neutral or positive emotion (e.g., **"joy"**) might score **1–3**, represented as a **circle** (0 corners).
+  - A moderately negative emotion (e.g., **"annoyed"**) might score **5–6**, rendered as a **hexagon**.
+  - A highly negative emotion (e.g., **"hate"**) might score **10**, forming a **decagon**.
+- This scoring could be based on LLM outputs or combined with datasets like **NRC Emotion Lexicon** or **SentiWordNet**.
+
+---
+
+### 2. 🌈 Color Based on Emotion–Hue Mapping Theory
+
+The emotional color of the dot will no longer be random but based on **psychologically backed color–emotion associations**.
+
+**Referenced studies include:**
+
+- *Plutchik’s Wheel of Emotions* – e.g., **Joy = Yellow**, **Anger = Red**
+- *Valdez & Mehrabian (1994)* – emotional effects of hue, brightness, and saturation
+- *Kaya & Epps (2004)* – cross-cultural emotion–color responses
+- *Sutton & Altarriba (2016)* – color connotation in emotion language
+
+**Implementation plans:**
+
+- **Single emotion** → mapped to a defined hue (e.g., anger → red)
+- **Blended emotion** → mix hues (e.g., joy + anger → orange)
+- LLM-generated emotional tags will be translated into RGB/HSB values using this theory for richer expression.
+
+---
+
+### 3. 💫 Animation Based on Arousal Level or Heartbeat Analogy
+
+Future improvements aim to simulate the **emotional energy** through movement, inspired by human arousal (e.g., heart rate, energy level).
+
+**Each emotion is scored with an arousal level (1–10)** using:
+
+- LLM-identified emotion → mapped to arousal based on models such as the **Circumplex Model of Affect**
+- Example:
+  - **Excitement** = high arousal (9–10)
+  - **Calm** = low arousal (1–2)
+
+**Movement translation:**
+
+- **Bounce speed** → reflects energy (faster bounce = higher arousal)
+- **Glow frequency** → faster pulsing = heightened emotion
+- **Shake/jitter** → added to intense emotions like panic or rage
+
+These dynamic visual features aim to create a **more emotionally expressive and immersive experience**.
+
+---
+
+### 4. Planned Features
 - **Collaborative Sessions**: Multi-user consciousness tracking
 - **Biometric Integration**: Heart rate, EEG data integration
 - **Advanced Analytics**: Machine learning insights
@@ -363,7 +420,7 @@ Add consciousness analytics:
 - **Voice Integration**: Speech-to-emotion analysis
 - **Therapy Integration**: Clinical assessment tools
 
-### API Extensions
+### 5. API Extensions
 - **Webhook Support**: Real-time data streaming
 - **Plugin System**: Third-party integrations
 - **Cloud Sync**: Cross-device synchronization
